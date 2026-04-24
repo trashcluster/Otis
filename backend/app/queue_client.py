@@ -21,14 +21,12 @@ class QueueClient:
     def enqueue_job(self, job_id: str, diarization_enabled: bool) -> bool:
         """Enqueue transcription job."""
         try:
-            # Import here to avoid circular imports
-            from worker import process_transcription
-            
+            # Enqueue job using function path reference
+            # Worker will import and execute the function
             self.queue.enqueue(
-                process_transcription,
-                job_id=job_id,
+                'worker.process_transcription',
+                job_id=str(job_id),
                 diarization_enabled=diarization_enabled,
-                job_id=job_id,  # RQ job ID
             )
             logger.info(f"Job enqueued: {job_id}")
             return True
