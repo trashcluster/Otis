@@ -1,5 +1,5 @@
 # Multi-stage worker builder
-FROM python:3.11-slim as builder
+FROM python:3.11-slim AS builder
 
 WORKDIR /app
 
@@ -28,6 +28,10 @@ COPY --chown=otis:otis *.py ./
 
 # Switch to non-root user
 USER otis
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD python -c "import redis; redis.Redis.from_url('redis://redis:6379/0').ping()" || exit 1
 
 # Default environment
 ENV PYTHONUNBUFFERED=1
