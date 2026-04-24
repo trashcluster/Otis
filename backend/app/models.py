@@ -1,7 +1,7 @@
 """SQLAlchemy models for database schema."""
 import uuid
 from datetime import datetime
-from sqlalchemy import Column, String, Boolean, DateTime, Text, Enum as SQLEnum
+from sqlalchemy import Column, String, Boolean, DateTime, Text, Enum as SQLEnum, Index
 from sqlalchemy.dialects.postgresql import UUID
 import enum
 
@@ -28,6 +28,12 @@ class Job(Base):
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
     completed_at = Column(DateTime, nullable=True)
     error_message = Column(Text, nullable=True)
+
+    # Define indexes
+    __table_args__ = (
+        Index('idx_jobs_status', 'status'),
+        Index('idx_jobs_created_at', 'created_at'),
+    )
 
     def __repr__(self):
         return f"<Job(id={self.id}, filename={self.filename}, status={self.status})>"
