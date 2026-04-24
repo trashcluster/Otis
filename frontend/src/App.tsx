@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FileUploader } from './components/FileUploader';
 import { JobStatusDisplay } from './components/JobStatus';
 import { TranscriptViewer } from './components/TranscriptViewer';
-import { apiService, UploadResponse, JobStatus, JobResult } from './services/api';
+import { apiService, JobStatus, JobResult } from './services/api';
 import './index.css';
 
 type AppStage = 'upload' | 'processing' | 'result';
