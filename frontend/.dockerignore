@@ -1,0 +1,12 @@
+node_modules/
+dist/
+build/
+.next/
+.env.local
+.DS_Store
+*.log
+.git/
+.gitignore
+README.md
+.prettier*
+.eslint*
