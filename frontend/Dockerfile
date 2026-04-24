@@ -1,5 +1,5 @@
 # Multi-stage frontend builder
-FROM node:20-alpine as builder
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
@@ -27,7 +27,7 @@ FROM node:20-alpine
 WORKDIR /app
 
 # Create non-root user
-RUN addgroup -g 1000 otis && adduser -D -u 1000 -G otis otis
+RUN addgroup -g 1001 otis && adduser -D -u 1001 -G otis otis
 
 # Install lightweight server
 RUN npm install -g serve
